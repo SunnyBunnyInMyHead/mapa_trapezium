@@ -17,7 +17,7 @@ public class Trapezium {
 	}
 
 	private void calibrate() {
-		Line nearest = Utils.createLine(nearestAdd, furtherMain);
+		Line nearest = Utils.createLine(nearestAdd, nearestMain);
 		Line further = Utils.createLine(furtherAdd, furtherMain);
 		if (Utils.isLineParallel(nearest, further)) {
 			return;

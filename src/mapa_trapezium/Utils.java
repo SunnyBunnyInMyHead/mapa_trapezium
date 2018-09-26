@@ -296,9 +296,9 @@ public class Utils {
 		// create Trapezium
 		List<Trapezium> list = new ArrayList<Trapezium>();
 		// list.addAll(getTrapeziumsByDifferentPoints(points,observer,numbNearestPoints,numbFurtherPoints));
-		// list.addAll(getTrapeziumsByNearestPoints(points, observer,
-		// numbNearestPoints*2));
-		list.addAll(getTrapeziumsByFurtherPoints(points, observer, numbFurtherPoints * 2));
+		 list.addAll(getTrapeziumsByNearestPoints(points, observer,
+		 numbNearestPoints*2));
+		//list.addAll(getTrapeziumsByFurtherPoints(points, observer, 4));
 		System.out.println(list.size());
 		Trapezium trapezium = Utils.getBestTrapezium(list.toArray(new Trapezium[list.size()]));
 		// System.out.println(tr.getArea());
@@ -391,6 +391,9 @@ public class Utils {
 	private static List<Trapezium> getTrapeziumsByFurtherPoints(Point[] points, Point observer, int numbFurtherPoints) {
 		Position[] positions = Utils.getDist(observer, points);
 		Utils.sortPositionByDist(positions);
+		for (Position position : positions) {
+			System.out.println(position.getDist());
+		}
 		Point maxPos1, maxPos2;
 		Point totalMinPos = positions[0].getPoint();
 		Point nearestPoint1, nearestPoint2;
