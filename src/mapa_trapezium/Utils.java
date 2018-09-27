@@ -295,9 +295,9 @@ public class Utils {
 
 		// create Trapezium
 		List<Trapezium> list = new ArrayList<Trapezium>();
-		 //list.addAll(getTrapeziumsByDifferentPoints(points,observer,numbNearestPoints,numbFurtherPoints));
-		 //list.addAll(getTrapeziumsByNearestPoints(points, observer, numbNearestPoints*2));
-		list.addAll(getTrapeziumsByFurtherPoints(points, observer, numbNearestPoints*2));
+		list.addAll(getTrapeziumsByDifferentPoints(points,observer,numbNearestPoints,numbFurtherPoints));
+		list.addAll(getTrapeziumsByNearestPoints(points, observer, (int)(numbNearestPoints*1.8)));
+		list.addAll(getTrapeziumsByFurtherPoints(points, observer, (int)(numbNearestPoints*1.8)));
 		System.out.println(list.size());
 		Trapezium trapezium = Utils.getBestTrapezium(list.toArray(new Trapezium[list.size()]));
 		// System.out.println(tr.getArea());
@@ -390,31 +390,24 @@ public class Utils {
 	private static List<Trapezium> getTrapeziumsByFurtherPoints(Point[] points, Point observer, int numbFurtherPoints) {
 		Position[] positions = Utils.getDist(observer, points);
 		Utils.sortPositionByDist(positions);
-		for (Position position : positions) {
-			System.out.println(position.getDist());
-		}
 		Point maxPos1, maxPos2;
 		Point totalMinPos = positions[0].getPoint();
 		Point nearestPoint1, nearestPoint2;
 		List<Trapezium> list = new ArrayList<Trapezium>();
 		outer: for (int i = 0; i < numbFurtherPoints; i++) {
-			maxPos1 = positions[numbFurtherPoints - 1 - i].getPoint();
-			System.out.println(maxPos1);
+			maxPos1 = positions[positions.length - 1 - i].getPoint();
 			nearestPoint1 = Utils.getNearestCrossPoint(points, maxPos1, observer, totalMinPos);
 			if (nearestPoint1 == null) {
-				System.out.println("i" + i);
-				continue outer;// Utils.getNearestCrossPoint(points, maxPos, observer, totalMinPos);
-
+				continue outer;
 			}
 			inner: for (int j = 0; j < numbFurtherPoints; j++) {
 				if (i == j) {
 					continue inner;
 				}
-				maxPos2 = positions[numbFurtherPoints - 1 - j].getPoint();
+				maxPos2 = positions[positions.length - 1 - j].getPoint();
 				
 				nearestPoint2 = Utils.getNearestCrossPoint(points, maxPos2, observer, totalMinPos);
 				if (nearestPoint2 == null) {
-					System.out.println("i" + i+"j" + j);
 					continue inner;
 				}
 				list.add(new Trapezium(nearestPoint1, nearestPoint2, maxPos2, maxPos1));
