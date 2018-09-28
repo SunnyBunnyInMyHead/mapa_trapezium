@@ -173,17 +173,12 @@ class Utils {
 
 	static Point[] dellRepeatedNearestPoints(Point[] points) {
 		ArrayList<Point> list = new ArrayList<>();
-		Point lastPoint = points[0];
-		for (int i = 1; i < points.length; i++) {
+		Point lastPoint = points[points.length - 1];// last point
+		for (int i = 0; i < points.length; i++) {
 			if (lastPoint.getX() != points[i].getX() && lastPoint.getY() != points[i].getY()) {
 				lastPoint = points[i];
 				list.add(lastPoint);
 			}
-		}
-
-		if (points[0].getX() != points[points.length - 1].getX()
-				&& points[0].getY() != points[points.length - 1].getY()) {
-			list.remove(list.size() - 1);// dell last
 		}
 		return list.toArray(new Point[0]);
 	}

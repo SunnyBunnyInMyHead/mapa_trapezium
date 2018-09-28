@@ -22,7 +22,7 @@ class Trapezium {
 	private void calibrate() {
 		Line nearest = Utils.createLine(nearestAdd, nearestMain);
 		Line further = Utils.createLine(furtherAdd, furtherMain);
-		if (Utils.isLineParallel(nearest, further)) {
+		if ((nearest==null|| further==null)&&Utils.isLineParallel(nearest, further)) {
 			return;
 		}
 		double distMain = Utils.getDist(nearestMain, further);
@@ -32,13 +32,18 @@ class Trapezium {
 		if (distMain < distAdd) {
 			newNearestLine = Utils.getParallelLine(further, nearestMain);
 			sideLine = Utils.createLine(furtherMain, nearestAdd);
-			newPoint = Utils.getCrossPoint(newNearestLine, sideLine);
-			nearestAdd = newPoint;
+			if (sideLine!=null){
+				newPoint = Utils.getCrossPoint(newNearestLine, sideLine);
+				nearestAdd = newPoint;
+			}
+
 		} else {
 			newNearestLine = Utils.getParallelLine(further, nearestAdd);
 			sideLine = Utils.createLine(furtherAdd, nearestMain);
-			newPoint = Utils.getCrossPoint(newNearestLine, sideLine);
-			nearestMain = newPoint;
+			if (sideLine!=null){
+				newPoint = Utils.getCrossPoint(newNearestLine, sideLine);
+				nearestMain = newPoint;
+			}
 		}
 
 	}

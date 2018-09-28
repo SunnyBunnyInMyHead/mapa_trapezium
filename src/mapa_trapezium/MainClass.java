@@ -6,26 +6,6 @@ class MainClass {
 	private static final ArrayList<Point> points = new ArrayList<>();
 
 	public static void main(String[] args) {
-/*		String s  = "522.85";
-		String[] s1 = s.split("\\.");
-		System.out.println(s1.length);
-		double d = Double.valueOf(s);
-		int main,add;
-		main = Integer.valueOf(s1[0]);
-		add = Integer.valueOf(s1[1]);
-		System.out.println(main);
-		System.out.println(add);*/
-		
-		
-		/*outer: for (int i = 0; i < 4; i++) {
-			System.out.println("i"+i);
-			inner: for (int j = 0; j < 4; j++) {
-				if (i == j) {
-					continue inner;
-				}
-				System.out.println("j"+j);
-			}
-		}*/
 		
 		points.add(new Point(1, 5));
 		points.add(new Point(1, 7));

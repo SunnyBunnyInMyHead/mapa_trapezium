@@ -123,7 +123,7 @@ class TrapeziumUtils {
         Point crossPoint, bestCrossPoint = maxPoint;
         double distance, bestCrossPointDist = maxDistance;
         for (int i = 0; i < lines.length - 1; i++) {
-            if (Utils.isLineCrossStretch(maxDistLine, points[i], points[i + 1])) {
+            if ((lines[i] != null)&&Utils.isLineCrossStretch(maxDistLine, points[i], points[i + 1])) {
                 crossPoint = Utils.getCrossPoint(lines[i], maxDistLine);
                 distance = Utils.getDist(observer, crossPoint);
                 if (distance < maxDistance && distance > totalMinDistance) {
@@ -135,7 +135,7 @@ class TrapeziumUtils {
             }
         }
         //for last point
-        if (Utils.isLineCrossStretch(maxDistLine, points[lines.length - 1], points[0])) {
+        if ((lines[lines.length - 1] != null)&&Utils.isLineCrossStretch(maxDistLine, points[lines.length - 1], points[0])) {
             crossPoint = Utils.getCrossPoint(lines[lines.length - 1], maxDistLine);
             distance = Utils.getDist(observer, crossPoint);
             if (distance < maxDistance && distance > totalMinDistance) {
@@ -144,7 +144,6 @@ class TrapeziumUtils {
                 }
             }
         }
-
         if (bestCrossPoint.equals(maxPoint)) {
             return null;// there are no good points
         }
@@ -164,7 +163,7 @@ class TrapeziumUtils {
         double distance, bestCrossPointDist = minDistance;
         //for all points except last one
         for (int i = 0; i < lines.length - 1; i++) {
-            if (Utils.isLineCrossStretch(minDistLine, points[i], points[i + 1])) {
+            if ((lines[i] != null)&&Utils.isLineCrossStretch(minDistLine, points[i], points[i + 1])) {
                 crossPoint = Utils.getCrossPoint(lines[i], minDistLine);
                 distance = Utils.getDist(observer, crossPoint);
                 if (distance > minDistance && distance < totalMaxDistance) {
@@ -176,7 +175,7 @@ class TrapeziumUtils {
             }
         }
         //for last point
-        if (Utils.isLineCrossStretch(minDistLine, points[lines.length - 1], points[0])) {
+        if ((lines[lines.length - 1] != null)&&Utils.isLineCrossStretch(minDistLine, points[lines.length - 1], points[0])) {
             crossPoint = Utils.getCrossPoint(lines[lines.length - 1], minDistLine);
             distance = Utils.getDist(observer, crossPoint);
             if (distance > minDistance && distance < totalMaxDistance) {

@@ -4,16 +4,16 @@ class Position {
 	private final Point point;
 	private final double dist;
 
-	public Position(Point point, double dist) {
+	Position(Point point, double dist) {
 		this.point = point;
 		this.dist = dist;
 	}
 
-	public Point getPoint() {
+	Point getPoint() {
 		return point;
 	}
 
-	public double getDist() {
+	double getDist() {
 		return dist;
 	}
 
