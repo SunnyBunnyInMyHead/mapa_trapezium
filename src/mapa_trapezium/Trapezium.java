@@ -14,7 +14,7 @@ public class Trapezium {
 		this.furtherAdd = furtherAdd;
 		if (nearestMain != null && nearestAdd != null && furtherMain != null && furtherAdd != null) {
 			calibrate();
-			area = calcArea(nearestMain, nearestAdd, furtherMain, furtherAdd);
+			area = calcArea(this.nearestMain, this.nearestAdd, this.furtherMain, this.furtherAdd);
 		}
 
 	}

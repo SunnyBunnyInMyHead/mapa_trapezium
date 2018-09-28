@@ -2,7 +2,7 @@ package mapa_trapezium;
 
 import java.util.ArrayList;
 
-class MainClass {
+public class MainClass {
 	private static final ArrayList<Point> points = new ArrayList<>();
 
 	public static void main(String[] args) {
@@ -21,22 +21,12 @@ class MainClass {
 		Point[] pointArr = points.toArray(new Point[0]);
 		
 		System.out.println(Utils.isPolygonBulging(pointArr));
-		Utils.dellRepeatedNearestPoints(pointArr);
-		 //show(pointArr);
-		// edited array
-		if(pointArr.length<=5){
-			pointArr = Utils.addTwoMiddlePoints(pointArr);
-		}else{
-			pointArr = Utils.addMiddlePoints(pointArr);
-		}
-		
-		 //show(pointArr);
-		
+
 		Point observer = new Point(2.5, 12);
 
-		Trapezium trapezium = TrapeziumUtils.calculateTrapezium(pointArr, observer, 4, 4,0);
+		Trapezium trapezium = TrapeziumUtils.calculateTrapezium(pointArr, observer, 4, 4,3);
 		show(trapezium.getPoints());
-		//getTrPoint(trapezium.getPoints());
+		getTrPoint(trapezium.getPoints());
 
 		//Point observer = new Point(2.5, 12);
 		//new Trapezium(new Point(3.2435897435897525,8.034188034188032),new Point(2.004273504273513,8.158119658119656),new Point(1.5,4.25),new Point(4.0,4.0));//0
@@ -57,7 +47,7 @@ class MainClass {
 		System.out.println(" ");
 	}
 
-	private static void getTrPoint(Point[] points){
+	public static void getTrPoint(Point[] points){
 		for (Point p:points){
 			System.out.print("new Point("+p.getX()+","+p.getY()+"),");
 		}

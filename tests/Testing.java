@@ -1,11 +1,9 @@
-import mapa_trapezium.Point;
-import mapa_trapezium.Trapezium;
-import mapa_trapezium.TrapeziumUtils;
-import mapa_trapezium.Utils;
-import org.junit.Assert;
+import mapa_trapezium.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.fail;
 
 public class Testing {
     @Test
@@ -45,7 +43,7 @@ public class Testing {
 
     @Test
     public void hexTest(){
-        System.out.println("RhombusTest");
+        System.out.println("hexTest");
         //check value
         Trapezium [] trapeziums = new Trapezium[4];
 
@@ -68,32 +66,16 @@ public class Testing {
 
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
-        Utils.dellRepeatedNearestPoints(pointArr);
-        boolean rez = true;
         for (int i = 0;i<4;i++){// 4, because there are only 4 type of generation
-            rez = testGenTrap(pointArr,observer,trapeziums[i],i,4,4)!=rez;
+            if(!testGenTrap(pointArr,observer,trapeziums[i],i,4,4)){
+                fail(String.valueOf("fail on"+i));
+            }
         }
-        assert (rez);
-        /*if(rez){
-            System.out.print("rez"+rez);
-
-        }*/
-
     }
 
     boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
 
-        Point[] points = pointsArr;
-
-        Utils.dellRepeatedNearestPoints(points);
-
-        if(points.length<=5){
-            points = Utils.addTwoMiddlePoints(points);
-        }else{
-            points = Utils.addMiddlePoints(points);
-        }
-
-        Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(points, observer, numbOfNearestPoints, numbOfFurtherPoints,typeOfTrapGen);
+        Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(pointsArr, observer, numbOfNearestPoints, numbOfFurtherPoints,typeOfTrapGen);
 
         return  (same(trapezium.getArea(),trapeziumCalculated.getArea())
                 &&(same(Utils.getDist(observer, trapezium.getNearLine()), Utils.getDist(observer, trapeziumCalculated.getNearLine())))
@@ -102,6 +84,6 @@ public class Testing {
     }
 
     private boolean same(double numb1, double numb2){
-        return numb1-numb2<0.000001;
+        return numb1-numb2<0.00001;
     }
 }
