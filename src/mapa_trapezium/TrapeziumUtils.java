@@ -3,7 +3,7 @@ package mapa_trapezium;
 import java.util.ArrayList;
 import java.util.List;
 
-class TrapeziumUtils {
+public class TrapeziumUtils {
     private static Trapezium getBestTrapezium(Trapezium[] trapeziums) {
         if (trapeziums.length == 0) {
             return null;
@@ -204,7 +204,7 @@ class TrapeziumUtils {
      *                                  3 - two further
      * @return trapezium with max area
      */
-    static Trapezium calculateTrapezium(Point[] points, Point observer, int numbNearestPoints,
+    public  static Trapezium calculateTrapezium(Point[] points, Point observer, int numbNearestPoints,
                                         int numbFurtherPoints, int typeOfTrapeziumGeneration) {
         // create positions(points with distance)
         Position[] positions = Utils.getDist(observer, points);

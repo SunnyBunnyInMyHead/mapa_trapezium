@@ -3,7 +3,7 @@ package mapa_trapezium;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class Utils {
+public class Utils {
 	static Line createLine(Point p1, Point p2) {
 		double a, b, c;
 		a = p1.getY() - p2.getY();
@@ -41,7 +41,7 @@ class Utils {
 
 	}
 
-	static boolean isPolygonBulging(Point[] points) {
+	public static boolean isPolygonBulging(Point[] points) {
 		if (points.length < 2) {
 			return false;
 		}
@@ -76,7 +76,7 @@ class Utils {
 
 	}
 
-	static double getDist(Point point, Line line) {
+	public static double getDist(Point point, Line line) {
 		return Math.abs(line.getA() * point.getX() + line.getB() * point.getY() + line.getC())
 				/ Math.sqrt(line.getA() * line.getA() + line.getB() * line.getB());
 	}
@@ -140,7 +140,7 @@ class Utils {
 		return new Point[] { new Point(x / 3, y / 3), new Point((x / 3) * 2, (y / 3) * 2) };
 	}
 
-	static Point[] addMiddlePoints(Point[] points) {
+	public static Point[] addMiddlePoints(Point[] points) {
 		Point[] arrWithAddPoints = new Point[points.length * 2];
 		for (int i = 0; i < arrWithAddPoints.length - 2; i += 2) {
 			arrWithAddPoints[i] = points[i / 2];
@@ -152,7 +152,7 @@ class Utils {
 		return arrWithAddPoints;
 	}
 
-	static Point[] addTwoMiddlePoints(Point[] points) {
+	public static Point[] addTwoMiddlePoints(Point[] points) {
 		ArrayList<Point> list = new ArrayList<>();
 		for (int i = 0; i < points.length - 1; i++) {
 			list.add(points[i]);
@@ -171,7 +171,7 @@ class Utils {
 		return meaning != (p2.getX() * line.getA() + p2.getY() * line.getB() + line.getC()) > 0;
 	}
 
-	static Point[] dellRepeatedNearestPoints(Point[] points) {
+	public static Point[] dellRepeatedNearestPoints(Point[] points) {
 		ArrayList<Point> list = new ArrayList<>();
 		Point lastPoint = points[points.length - 1];// last point
 		for (int i = 0; i < points.length; i++) {
