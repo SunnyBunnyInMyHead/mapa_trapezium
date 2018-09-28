@@ -1,8 +1,8 @@
 package mapa_trapezium;
 
-public class Position {
-	private Point point;
-	private double dist;
+class Position {
+	private final Point point;
+	private final double dist;
 
 	public Position(Point point, double dist) {
 		this.point = point;

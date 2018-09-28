@@ -2,13 +2,15 @@ package mapa_trapezium;
 
 import java.util.ArrayList;
 
-public class TestingUtils {
+import static mapa_trapezium.TrapeziumUtils.calculateTrapezium;
+
+class TestingUtils {
 	
-	public static boolean testBulging() {
+	private static boolean testBulging() {
 		ArrayList<Point> points;
 
 		int trueNumbs = 0;
-		points = new ArrayList<Point>();
+		points = new ArrayList<>();
 		// checking if Polygon is Bulging
 		points.add(new Point(5, 10));
 		points.add(new Point(7, 7));
@@ -19,18 +21,18 @@ public class TestingUtils {
 		// points.add(new Point(-5,3));
 		System.out.println();
 
-		trueNumbs = Utils.isPolygonBulging(points.toArray(new Point[points.size()])) ? trueNumbs++ : trueNumbs--;
+		trueNumbs = Utils.isPolygonBulging(points.toArray(new Point[0])) ? trueNumbs+1 : trueNumbs-1;
 		// must be ++
 
 		points.add(new Point(-5, 3));
 
-		trueNumbs = Utils.isPolygonBulging(points.toArray(new Point[points.size()])) ? trueNumbs++ : trueNumbs--;
+		trueNumbs = Utils.isPolygonBulging(points.toArray(new Point[0])) ? trueNumbs+1 : trueNumbs-1;
 		// must be --
-		return trueNumbs == 0 ? true : false;
+		return trueNumbs == 0;
 	}
 	
-	public static boolean testTrapezium1() {
-		ArrayList<Point> points = new ArrayList<Point>();
+	private static boolean testTrapezium1() {
+		ArrayList<Point> points = new ArrayList<>();
 		
 		points.add(new Point(1, 5));
 		points.add(new Point(1, 7));
@@ -42,25 +44,22 @@ public class TestingUtils {
 		points.add(new Point(3, 3.6));
 		points.add(new Point(2, 3.5));
 		
-		Point[] pointArr = points.toArray(new Point[points.size()]);
+		Point[] pointArr = points.toArray(new Point[0]);
 		//Utils.isPolygonBulging(pointArr);
 		
-		pointArr = Utils.addMidlePoints(pointArr);
+		pointArr = Utils.addMiddlePoints(pointArr);
 		
 		Point observer = new Point(10, 15);
-		Trapezium trapezium = Utils.calculateTrapezium(pointArr, observer, 3, 3);
+		Trapezium trapezium = calculateTrapezium(pointArr, observer, 3, 3);
 		
 		Trapezium checkTrapezium = new Trapezium(new Point(3.50,8.00),new Point(4.3758573388203015, 6.413808870598994),new Point(2.50, 3.55),new Point(1.00, 5.3076923076923075));
-	
-		if(trapezium.getArea()==checkTrapezium.getArea()){
-			return true;
-		}
-		
-		return false;
+
+		return trapezium.getArea() == checkTrapezium.getArea();
+
 	}
 	
-	public static boolean testTrapezium2() {
-		ArrayList<Point> points = new ArrayList<Point>();
+	private static boolean testTrapezium2() {
+		ArrayList<Point> points = new ArrayList<>();
 		
 		points.add(new Point(1, 5));
 		points.add(new Point(1, 7));
@@ -72,29 +71,23 @@ public class TestingUtils {
 		points.add(new Point(3, 3.6));
 		points.add(new Point(2, 3.5));
 		
-		Point[] pointArr = points.toArray(new Point[points.size()]);
+		Point[] pointArr = points.toArray(new Point[0]);
 		//Utils.isPolygonBulging(pointArr);
 				
 		Point observer = new Point(10, 15);
-		Trapezium trapezium = Utils.calculateTrapezium(pointArr, observer, 3, 3);
+		Trapezium trapezium = calculateTrapezium(pointArr, observer, 3, 3);
 		
 		Trapezium checkTrapezium = new Trapezium(new Point(3.50,8.00),new Point(4.4913627639155465, 6.028790786948174),new Point(3.0, 3.6),new Point(1.00, 5.3076923076923075));
-	
-		if(trapezium.getArea()==checkTrapezium.getArea()){
-			return true;
-		}
-		
-		return false;
+
+		return trapezium.getArea() == checkTrapezium.getArea();
+
 	}
 
-	public static boolean testDellNearest() {
+	private static boolean testDellNearest() {
 		Point[] points = new Point[]{new Point(5, 10),new Point(7, 7),new Point(7, 7),new Point(8, 4),
 				new Point(3, 3),new Point(3, 3),new Point(3, 3),new Point(5, 10),new Point(1, 8),new Point(1, 8),new Point(5, 10)};
-		points = Utils.dellRepitedNearestPoints(points);
-		if(points.length==6){
-			return true;
-		}
-		return false;
+		points = Utils.dellRepeatedNearestPoints(points);
+		return points.length == 6;
 	}
 
 	public static boolean test() {
@@ -103,9 +96,6 @@ public class TestingUtils {
 		if(TestingUtils.testTrapezium1()) i++;
 		if(TestingUtils.testTrapezium2()) i++;
 		if(TestingUtils.testDellNearest()) i++;
-		if(i==4){
-			return true;
-		}
-		return false;
+		return i == 4;
 	}
 }

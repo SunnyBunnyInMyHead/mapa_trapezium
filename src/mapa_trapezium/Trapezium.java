@@ -1,7 +1,10 @@
 package mapa_trapezium;
 
 public class Trapezium {
-	private Point nearestMain, nearestAdd, furtherMain, furtherAdd;
+	private Point nearestMain;
+	private Point nearestAdd;
+	private final Point furtherMain;
+	private final Point furtherAdd;
 	private double area = 0.0;
 
 	public Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd) {

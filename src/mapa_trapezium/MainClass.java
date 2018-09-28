@@ -2,8 +2,8 @@ package mapa_trapezium;
 
 import java.util.ArrayList;
 
-public class MainClass {
-	static ArrayList<Point> points = new ArrayList<Point>();
+class MainClass {
+	private static ArrayList<Point> points = new ArrayList<>();
 
 	public static void main(String[] args) {
 /*		String s  = "522.85";
@@ -38,23 +38,23 @@ public class MainClass {
 		points.add(new Point(2, 3.5));
 
 		// started array
-		Point[] pointArr = points.toArray(new Point[points.size()]);
+		Point[] pointArr = points.toArray(new Point[0]);
 		
 		System.out.println(Utils.isPolygonBulging(pointArr));
 		
 		 //show(pointArr);
 		// edited array
 		if(pointArr.length<=5){
-			pointArr = Utils.addTwoMidlePoints(pointArr);
+			pointArr = Utils.addTwoMiddlePoints(pointArr);
 		}else{
-			pointArr = Utils.addMidlePoints(pointArr);
+			pointArr = Utils.addMiddlePoints(pointArr);
 		}
 		
 		 //show(pointArr);
 		
 		Point observer = new Point(2.5, 12);
 
-		Trapezium trapezium = Utils.calculateTrapezium(pointArr, observer, 4, 4);
+		Trapezium trapezium = TrapeziumUtils.calculateTrapezium(pointArr, observer, 4, 4);
 		show(trapezium.getPoints());
 
 		System.out.println("near dist: " + Utils.getDist(observer, trapezium.getNearLine()));
@@ -64,7 +64,7 @@ public class MainClass {
 		//System.out.println(TestingUtils.test());
 	}
 
-	public static void show(Point[] points) {
+	private static void show(Point[] points) {
 		System.out.println("x");
 		for (Point point : points) {
 			System.out.println(point.getX());
@@ -73,7 +73,7 @@ public class MainClass {
 		for (Point point : points) {
 			System.out.println(point.getY());
 		}
-		System.out.println("");
+		System.out.println(" ");
 
 	}
 }
