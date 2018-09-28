@@ -3,7 +3,7 @@ package mapa_trapezium;
 import java.util.ArrayList;
 
 class MainClass {
-	private static ArrayList<Point> points = new ArrayList<>();
+	private static final ArrayList<Point> points = new ArrayList<>();
 
 	public static void main(String[] args) {
 /*		String s  = "522.85";
@@ -54,7 +54,7 @@ class MainClass {
 		
 		Point observer = new Point(2.5, 12);
 
-		Trapezium trapezium = TrapeziumUtils.calculateTrapezium(pointArr, observer, 4, 4);
+		Trapezium trapezium = TrapeziumUtils.calculateTrapezium(pointArr, observer, 4, 4,0);
 		show(trapezium.getPoints());
 
 		System.out.println("near dist: " + Utils.getDist(observer, trapezium.getNearLine()));

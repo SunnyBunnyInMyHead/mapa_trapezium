@@ -2,7 +2,6 @@ package mapa_trapezium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 class Utils {
 	static Line createLine(Point p1, Point p2) {
@@ -67,7 +66,7 @@ class Utils {
 		return dir == getDirectionVectorSign(vec1, vec2);
 	}
 
-	public static Line[] generateLines(Point[] points) {
+	static Line[] generateLines(Point[] points) {
 		Line[] lines = new Line[points.length];
 		for (int i = 0; i < points.length - 1; i++) {
 			lines[i] = createLine(points[i], points[i + 1]);
@@ -87,7 +86,7 @@ class Utils {
 				+ (point2.getY() - point1.getY()) * (point2.getY() - point1.getY()));
 	}
 
-	public static Position[] getDist(Point point, Point[] points) {
+	static Position[] getDist(Point point, Point[] points) {
 		Position[] positions = new Position[points.length];
 		for (int i = 0; i < points.length; i++) {
 			positions[i] = new Position(points[i], getDist(point, points[i]));
@@ -95,7 +94,7 @@ class Utils {
 		return positions;
 	}
 
-	public static void sortPositionByDist(Position[] positions) {
+	static void sortPositionByDist(Position[] positions) {
 		Position position;
 		for (int i = 0; i < positions.length; i++) {
 			for (int j = 0; j < positions.length - 1; j++) {
@@ -124,21 +123,21 @@ class Utils {
 		return new Point(x, y);
 	}
 
-	public static Point getVector(Point p1, Point p2) {
+	private static Point getVector(Point p1, Point p2) {
 		return new Point(p2.getX() - p1.getX(), p2.getY() - p1.getY());
 	}
 
-	public static boolean getDirectionVectorSign(Point p1, Point p2) {
+	private static boolean getDirectionVectorSign(Point p1, Point p2) {
 		return (p1.getX() * p2.getY() - p1.getY() * p2.getX()) > 0;
 	}
 
-	public static Point getMiddlePoint(Point p1, Point p2) {
+	private static Point getMiddlePoint(Point p1, Point p2) {
 		return new Point((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
 	}
 
-	public static Point[] getTwoMiddlePoint(Point p1, Point p2) {
+	private static Point[] getTwoMiddlePoint(Point p1, Point p2) {
 		double x = p1.getX() + p2.getX(), y = p1.getY() + p2.getY();
-		return new Point[] { new Point(x / 3, y / 3), new Point((2 / 3) * x, (2 / 3) * y) };
+		return new Point[] { new Point(x / 3, y / 3), new Point((x / 3) * 2, (y / 3) * 2) };
 	}
 
 	static Point[] addMiddlePoints(Point[] points) {
@@ -164,7 +163,7 @@ class Utils {
 		return list.toArray(new Point[0]);
 	}
 
-	public static boolean isLineCrossStretch(Line line, Point p1, Point p2) {
+	static boolean isLineCrossStretch(Line line, Point p1, Point p2) {
 		boolean meaning;
 
 		meaning = (p1.getX() * line.getA() + p1.getY() * line.getB() + line.getC()) > 0;

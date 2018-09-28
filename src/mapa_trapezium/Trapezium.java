@@ -1,13 +1,13 @@
 package mapa_trapezium;
 
-public class Trapezium {
+class Trapezium {
 	private Point nearestMain;
 	private Point nearestAdd;
 	private final Point furtherMain;
 	private final Point furtherAdd;
 	private double area = 0.0;
 
-	public Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd) {
+	Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd) {
 		this.nearestMain = nearestMain;
 		this.nearestAdd = nearestAdd;
 		this.furtherMain = furtherMain;
@@ -43,7 +43,7 @@ public class Trapezium {
 
 	}
 
-	public double getArea() {
+	double getArea() {
 		return area;
 	}
 
@@ -62,15 +62,15 @@ public class Trapezium {
 		return calcArea(sideA, sideB, sideC, sideD);
 	}
 
-	public Point[] getPoints() {
+	Point[] getPoints() {
 		return new Point[] { nearestMain, nearestAdd, furtherMain, furtherAdd };
 	}
 
-	public Line getNearLine() {
+	Line getNearLine() {
 		return Utils.createLine(nearestMain, nearestAdd);
 	}
 
-	public Line getFurtherLine() {
+	Line getFurtherLine() {
 		return Utils.createLine(furtherMain, furtherAdd);
 	}
 

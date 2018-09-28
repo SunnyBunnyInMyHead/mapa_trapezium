@@ -1,25 +1,25 @@
 package mapa_trapezium;
 
-public class Line {
+class Line {
 	private final double a;
 	private final double b;
 	private final double c;
 
-	public Line(double a, double b, double c) {
+	Line(double a, double b, double c) {
 		this.a = a;
 		this.b = b;
 		this.c = c;
 	}
 
-	public double getA() {
+	double getA() {
 		return a;
 	}
 
-	public double getB() {
+	double getB() {
 		return b;
 	}
 
-	public double getC() {
+	double getC() {
 		return c;
 	}
 

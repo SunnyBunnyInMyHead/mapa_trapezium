@@ -50,7 +50,7 @@ class TestingUtils {
 		pointArr = Utils.addMiddlePoints(pointArr);
 		
 		Point observer = new Point(10, 15);
-		Trapezium trapezium = calculateTrapezium(pointArr, observer, 3, 3);
+		Trapezium trapezium = calculateTrapezium(pointArr, observer, 3, 3,0);
 		
 		Trapezium checkTrapezium = new Trapezium(new Point(3.50,8.00),new Point(4.3758573388203015, 6.413808870598994),new Point(2.50, 3.55),new Point(1.00, 5.3076923076923075));
 
@@ -75,7 +75,7 @@ class TestingUtils {
 		//Utils.isPolygonBulging(pointArr);
 				
 		Point observer = new Point(10, 15);
-		Trapezium trapezium = calculateTrapezium(pointArr, observer, 3, 3);
+		Trapezium trapezium = calculateTrapezium(pointArr, observer, 3, 3,0);
 		
 		Trapezium checkTrapezium = new Trapezium(new Point(3.50,8.00),new Point(4.4913627639155465, 6.028790786948174),new Point(3.0, 3.6),new Point(1.00, 5.3076923076923075));
 
