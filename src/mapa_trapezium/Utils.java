@@ -108,7 +108,7 @@ public class Utils {
 	}
 
 	static Point getCrossPoint(Line l1, Line l2) {
-		double a1, a2, b1, b2, c1, c2, x, y;
+		Double a1, a2, b1, b2, c1, c2, x, y;
 		a1 = l1.getA();
 		b1 = l1.getB();
 		c1 = l1.getC();
@@ -117,8 +117,23 @@ public class Utils {
 		b2 = l2.getB();
 		c2 = l2.getC();
 
-		y = (((a2 / a1) * c1) - c2) / (b2 - ((a2 / a1) * b1));
-		x = (((b1 * y) + c1) / a1) * (-1);
+            y = (((a2 / a1) * c1) - c2) / (b2 - ((a2 / a1) * b1));
+            x = (((b1 * y) + c1) / a1) * (-1);
+
+        if (x.isNaN()|| y.isNaN()){
+            x = (((b2 / b1) * c1) - c2) / (a2 - ((b2 / b1) * a1));
+            y = (((a1 * x) + c1) / b1) * (-1);
+        }
+
+
+        /*if (x.isNaN()|| y.isNaN()) {
+            double d, d1, d2;
+            d = a1 * b2 - a2 * b1;
+            d1 = c1 * b2 - b1 * c2;
+            d2 = a1 * c2 - a2 * c1;
+            y = -d2 / d;
+            x = -d1 / d;
+        }*/
 
 		return new Point(x, y);
 	}
@@ -191,4 +206,25 @@ public class Utils {
 		return new Line(line.getA(), line.getB(), (line.getA() * point.getX() + line.getB() * point.getY()) * (-1));
 	}
 
+	public  static boolean isPointBelongToStretch(Point beg, Point end, Point point){
+	    if((Utils.same(point.getX(),beg.getX())&&Utils.same(point.getY(),beg.getY()))
+        ||(Utils.same(point.getX(),end.getX())&&Utils.same(point.getY(),end.getY()))){
+	        return true;
+        }
+	    if(beg.getX()>end.getX()){
+	        if(beg.getY()>end.getY()){
+	            return beg.getX()>point.getX()&&point.getX()>end.getX()&&beg.getY()>point.getY()&&point.getY()>end.getY();
+            }
+            return beg.getX()>point.getX()&&point.getX()>end.getX()&&beg.getY()<point.getY()&&point.getY()<end.getY();
+        }else {
+            if(beg.getY()>end.getY()){
+                return beg.getX()<point.getX()&&point.getX()<end.getX()&&beg.getY()>point.getY()&&point.getY()>end.getY();
+            }
+            return beg.getX()<point.getX()&&point.getX()<end.getX()&&beg.getY()<point.getY()&&point.getY()<end.getY();
+        }
+    }
+
+    public static boolean same(double numb1, double numb2){
+        return Math.abs(numb1-numb2)<0.000001;
+    }
 }

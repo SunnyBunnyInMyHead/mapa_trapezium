@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class Testing {
@@ -73,17 +74,21 @@ public class Testing {
         }
     }
 
+    @Test
+    public void testPointBelong(){
+        Point p1 = new Point(4,4),
+                p2 = new Point(8,0),
+                p3 = new Point(6,2);
+        assertTrue(Utils.isPointBelongToStretch(p1,p2,p3));
+    }
+
     boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
 
         Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(pointsArr, observer, numbOfNearestPoints, numbOfFurtherPoints,typeOfTrapGen);
 
-        return  (same(trapezium.getArea(),trapeziumCalculated.getArea())
-                &&(same(Utils.getDist(observer, trapezium.getNearLine()), Utils.getDist(observer, trapeziumCalculated.getNearLine())))
-                &&(same(Utils.getDist(observer, trapezium.getFurtherLine()), Utils.getDist(observer, trapeziumCalculated.getFurtherLine())))
+        return  (Utils.same(trapezium.getArea(),trapeziumCalculated.getArea())
+                &&(Utils.same(Utils.getDist(observer, trapezium.getNearLine()), Utils.getDist(observer, trapeziumCalculated.getNearLine())))
+                &&(Utils.same(Utils.getDist(observer, trapezium.getFurtherLine()), Utils.getDist(observer, trapeziumCalculated.getFurtherLine())))
                 );
-    }
-
-    private boolean same(double numb1, double numb2){
-        return numb1-numb2<0.00001;
     }
 }

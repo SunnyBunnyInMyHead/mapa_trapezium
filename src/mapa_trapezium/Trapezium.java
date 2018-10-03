@@ -6,6 +6,7 @@ public class Trapezium {
 	private final Point furtherMain;
 	private final Point furtherAdd;
 	private double area = 0.0;
+    private boolean calibrated = false;
 
 	public Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd) {
 		this.nearestMain = nearestMain;
@@ -22,9 +23,13 @@ public class Trapezium {
 	private void calibrate() {
 		Line nearest = Utils.createLine(nearestAdd, nearestMain);
 		Line further = Utils.createLine(furtherAdd, furtherMain);
-		if ((nearest==null|| further==null)&&Utils.isLineParallel(nearest, further)) {
+		if (nearest==null|| further==null) {
 			return;
 		}
+		if (Utils.isLineParallel(nearest, further)){
+		    calibrated = true;
+		    return;
+        }
 		double distMain = Utils.getDist(nearestMain, further);
 		double distAdd = Utils.getDist(nearestAdd, further);
 		Line newNearestLine, sideLine;
@@ -45,10 +50,15 @@ public class Trapezium {
 				nearestMain = newPoint;
 			}
 		}
+        calibrated = true;
 
 	}
 
-	public double getArea() {
+    public boolean isCalibrated() {
+        return calibrated;
+    }
+
+    public double getArea() {
 		return area;
 	}
 
