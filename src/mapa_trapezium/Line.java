@@ -1,6 +1,6 @@
 package mapa_trapezium;
 
-class Line {
+public class Line {
 	private final double a;
 	private final double b;
 	private final double c;

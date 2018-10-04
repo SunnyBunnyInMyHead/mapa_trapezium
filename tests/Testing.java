@@ -82,6 +82,16 @@ public class Testing {
         assertTrue(Utils.isPointBelongToStretch(p1,p2,p3));
     }
 
+    @Test
+    public void testCrossPoint(){
+        Line line1 = Utils.createLine(new Point(3,6), new Point(8,6));
+        Line line2 = Utils.createLine(new Point(7,8), new Point(3,4));
+        Point crossPoint, crossPointExpected;
+        crossPointExpected = new Point(5,6);
+        crossPoint = Utils.getCrossPoint(line1,line2);
+        assertTrue(Utils.same(crossPoint,crossPointExpected));
+    }
+
     boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
 
         Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(pointsArr, observer, numbOfNearestPoints, numbOfFurtherPoints,typeOfTrapGen);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Utils {
-	static Line createLine(Point p1, Point p2) {
+	public static Line createLine(Point p1, Point p2) {
 		double a, b, c;
 		a = p1.getY() - p2.getY();
 		b = p2.getX() - p1.getX();
@@ -107,7 +107,7 @@ public class Utils {
 		}
 	}
 
-	static Point getCrossPoint(Line l1, Line l2) {
+	public static Point getCrossPoint(Line l1, Line l2) {
 		Double a1, a2, b1, b2, c1, c2, x, y;
 		a1 = l1.getA();
 		b1 = l1.getB();
@@ -227,4 +227,8 @@ public class Utils {
     public static boolean same(double numb1, double numb2){
         return Math.abs(numb1-numb2)<0.000001;
     }
+
+    public static boolean same(Point p1, Point p2){
+		return same(p1.getX(),p2.getX())&&same(p1.getY(),p2.getY());
+	}
 }
