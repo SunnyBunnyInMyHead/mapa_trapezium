@@ -81,22 +81,22 @@ public class Testing {
         points.add(new Point(10, 3));
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue("//up",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
 
         //under big base
         checkTrapezium = new Trapezium(new Point(7.75,3.0),new Point(6.25,3.0),new Point(5.6875,5.25),new Point(8.3125,5.25));
         observer =new Point(7,0);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue("//under big base",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
 
         //on diagonal
         checkTrapezium = new Trapezium(new Point(7.999999999999998,4.333333333333333),new Point(7.0,3.0),new Point(5.0,4.333333333333333),new Point(6.333333333333333,6.111111111111111));
         observer =new Point(13,-1);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue("//on diagonal",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
 
         //somewhere near side diagonal
         checkTrapezium = new Trapezium(new Point(7.176470588235294,4.647058823529412),new Point(8.764705882352942,4.647058823529412),new Point(7.0,3.0),new Point(4.0,3.0));
         observer =new Point(10.75, 6.5);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue("//somewhere near side diagonal",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
     }
 
     @Test

@@ -6,28 +6,32 @@ public class Trapezium {
 	private final Point furtherMain;
 	private final Point furtherAdd;
 	private double area = 0.0;
-    private boolean calibrated = false;
+    private boolean valid = false;
 
 	public Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd) {
 		this.nearestMain = nearestMain;
 		this.nearestAdd = nearestAdd;
 		this.furtherMain = furtherMain;
 		this.furtherAdd = furtherAdd;
-		if (nearestMain != null && nearestAdd != null && furtherMain != null && furtherAdd != null) {
+		validate();
+		if (valid) {
 			calibrate();
 			area = calcArea(this.nearestMain, this.nearestAdd, this.furtherMain, this.furtherAdd);
 		}
 
 	}
 
+	private void validate(){
+		valid = nearestMain != null && nearestAdd != null && furtherMain != null && furtherAdd != null
+				&& !Utils.same(nearestMain, nearestAdd) && !Utils.same(furtherMain, furtherAdd)
+				&&Utils.createLine(nearestAdd, nearestMain)!=null&&Utils.createLine(furtherAdd, furtherMain)!=null;
+
+	}
+
 	private void calibrate() {
 		Line nearest = Utils.createLine(nearestAdd, nearestMain);
 		Line further = Utils.createLine(furtherAdd, furtherMain);
-		if (nearest==null|| further==null) {
-			return;
-		}
 		if (Utils.isLineParallel(nearest, further)){
-		    calibrated = true;
 		    return;
         }
 		double distMain = Utils.getDist(nearestMain, further);
@@ -50,12 +54,10 @@ public class Trapezium {
 				nearestMain = newPoint;
 			}
 		}
-        calibrated = true;
-
 	}
 
-    public boolean isCalibrated() {
-        return calibrated;
+    public boolean isValid() {
+        return valid;
     }
 
     public double getArea() {

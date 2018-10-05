@@ -23,7 +23,7 @@ public class TrapeziumUtils {
     private static Trapezium[] deleteNotCalibratedTrapezium(Trapezium[] trapeziums){
         ArrayList<Trapezium> arr = new ArrayList<>();
         for (Trapezium trapezium: trapeziums) {
-            if(trapezium.isCalibrated()){
+            if(trapezium.isValid()){
                 arr.add(trapezium);
             }
         }
@@ -116,9 +116,11 @@ public class TrapeziumUtils {
         return list;
     }
 
-    private static Point getNearestCrossPoint(Point[] points, Point maxPoint, Point observer, Point totalMin,Point strikePoint) {
-
-        Line[] lines = Utils.generateLines(points);
+    private static Point getNearestCrossPoint(Point[] points0, Point maxPoint, Point observer, Point totalMin,Point strikePoint) {
+        Point [] points = new Point[points0.length+1];
+        System.arraycopy(points0,0,points,0,points0.length);
+        points[points0.length] = points0[0];
+        Line[] lines = Utils.generateLines(points0);
         Line maxDistLine = Utils.createLine(observer, maxPoint);
         double maxDistance = Utils.getDist(maxPoint, observer);
         double totalMinDistance = Utils.getDist(totalMin, observer);
@@ -128,7 +130,7 @@ public class TrapeziumUtils {
         //for all points except last one
         Point crossPoint, bestCrossPoint = maxPoint;
         double distance, bestCrossPointDist = maxDistance;
-        for (int i = 0; i < lines.length - 1; i++) {
+        for (int i = 0; i < points.length-1 ; i++) {
             if ((lines[i] != null)) {
                 crossPoint = Utils.getCrossPoint(lines[i], maxDistLine);
                 if(!Utils.isPointBelongToStretch(points[i],points[i+1],crossPoint)){//check that point on stretch
@@ -146,33 +148,17 @@ public class TrapeziumUtils {
                 }
             }
         }
-        //for last point
-        if ((lines[lines.length - 1] != null)) {
-            crossPoint = Utils.getCrossPoint(lines[lines.length - 1], maxDistLine);
-            if(Utils.isPointBelongToStretch(points[lines.length - 1], points[0],crossPoint)){//check that point on stretch
-                distance = Utils.getDist(observer, crossPoint);
-                if (distance < maxDistance && distance > totalMinDistance) {
-                    if (distance <= bestCrossPointDist) {// check best
-                        if(strikePoint!=null){
-                            if(!Utils.same(crossPoint,strikePoint)){
-                                bestCrossPoint = crossPoint;
-                            }
-                        }else {
-                            bestCrossPoint = crossPoint;
-                        }
-                    }
-                }
-            }
-        }
         if (Utils.same(bestCrossPoint.getY(),maxPoint.getY())&&Utils.same(bestCrossPoint.getX(),maxPoint.getX())) {
             return null;// there are no good points
         }
         return bestCrossPoint;
     }
 
-    private static Point getFurtherCrossPoint(Point[] points, Point minPoint, Point observer, Point totalMax, Point strikePoint) {
-
-        Line[] lines = Utils.generateLines(points);
+    private static Point getFurtherCrossPoint(Point[] points0, Point minPoint, Point observer, Point totalMax, Point strikePoint) {
+        Point [] points = new Point[points0.length+1];
+        System.arraycopy(points0,0,points,0,points0.length);
+        points[points0.length] = points0[0];
+        Line[] lines = Utils.generateLines(points0);
         Line minDistLine = Utils.createLine(observer, minPoint);
         double minDistance = Utils.getDist(minPoint, observer);
         double totalMaxDistance = Utils.getDist(totalMax, observer);
@@ -182,7 +168,7 @@ public class TrapeziumUtils {
         Point crossPoint, bestCrossPoint = minPoint;
         double distance, bestCrossPointDist = minDistance;
         //for all points except last one
-        for (int i = 0; i < lines.length - 1; i++) {
+        for (int i = 0; i < points.length -1; i++) {
             if ((lines[i] != null)) {
                 crossPoint = Utils.getCrossPoint(lines[i], minDistLine);
                 if(!Utils.isPointBelongToStretch(points[i],points[i+1],crossPoint)){//check that point on stretch
@@ -196,25 +182,6 @@ public class TrapeziumUtils {
                         }
                         bestCrossPoint = crossPoint;
                         bestCrossPointDist = distance;
-                    }
-                }
-            }
-        }
-        //for last point
-        if ((lines[lines.length - 1] != null)) {
-            crossPoint = Utils.getCrossPoint(lines[lines.length - 1], minDistLine);
-            if(Utils.isPointBelongToStretch(points[lines.length - 1], points[0],crossPoint)) {//check that point on stretch
-                distance = Utils.getDist(observer, crossPoint);
-                if (distance > minDistance && distance < totalMaxDistance) {
-                    if (distance >= bestCrossPointDist) {// check best
-                        if(strikePoint!=null){
-                            if(!Utils.same(crossPoint,strikePoint)){
-                                bestCrossPoint = crossPoint;
-                            }
-                        }else {
-                            bestCrossPoint = crossPoint;
-                        }
-
                     }
                 }
             }
