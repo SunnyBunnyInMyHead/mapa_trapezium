@@ -150,11 +150,6 @@ public class Utils {
 		return new Point((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
 	}
 
-	private static Point[] getTwoMiddlePoint(Point p1, Point p2) {
-		double x = p1.getX() + p2.getX(), y = p1.getY() + p2.getY();
-		return new Point[] { new Point(x / 3, y / 3), new Point((x / 3) * 2, (y / 3) * 2) };
-	}
-
 	public static Point[] addMiddlePoints(Point[] points) {
 		Point[] arrWithAddPoints = new Point[points.length * 2];
 		for (int i = 0; i < arrWithAddPoints.length - 2; i += 2) {
@@ -165,17 +160,6 @@ public class Utils {
 		arrWithAddPoints[arrWithAddPoints.length - 1] = getMiddlePoint(points[points.length - 1], points[0]);
 
 		return arrWithAddPoints;
-	}
-
-	public static Point[] addTwoMiddlePoints(Point[] points) {
-		ArrayList<Point> list = new ArrayList<>();
-		for (int i = 0; i < points.length - 1; i++) {
-			list.add(points[i]);
-			list.addAll(new ArrayList<>(Arrays.asList(getTwoMiddlePoint(points[i], points[i + 1]))));
-		}
-		list.add(points[points.length - 1]);
-		list.addAll(new ArrayList<>(Arrays.asList(getTwoMiddlePoint(points[points.length - 1], points[0]))));
-		return list.toArray(new Point[0]);
 	}
 
 	static boolean isLineCrossStretch(Line line, Point p1, Point p2) {
