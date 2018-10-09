@@ -221,21 +221,21 @@ public class Utils {
 			return false;
 		}
 		Point vec1, vec2;
+		boolean dir=true;
+        vec1 = Utils.getVector(arr[arr.length - 1], point);
+        vec2 = Utils.getVector(arr[arr.length - 1], arr[0]);
+        if(!getDirectionVectorSign(vec1,vec2)){
+            dir= false;
+        }
+
 
 		for (int i = 0; i < arr.length - 1; i++){
 			vec1 = Utils.getVector(arr[i], point);
 			vec2 = Utils.getVector(arr[i], arr[i + 1]);
-			if(!getDirectionVectorSign(vec1,vec2)){
+			if(getDirectionVectorSign(vec1,vec2)!=dir){
 				return false;
 			}
 		}
-
-		vec1 = Utils.getVector(arr[arr.length - 1], point);
-		vec2 = Utils.getVector(arr[arr.length - 1], arr[0]);
-		if(!getDirectionVectorSign(vec1,vec2)){
-			return false;
-		}
-
 		return true;
 	}
 
