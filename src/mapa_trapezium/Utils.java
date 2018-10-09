@@ -138,11 +138,11 @@ public class Utils {
 		return new Point(x, y);
 	}
 
-	private static Point getVector(Point p1, Point p2) {
+	public static Point getVector(Point p1, Point p2) {
 		return new Point(p2.getX() - p1.getX(), p2.getY() - p1.getY());
 	}
 
-	private static boolean getDirectionVectorSign(Point p1, Point p2) {
+	public static boolean getDirectionVectorSign(Point p1, Point p2) {
 		return (p1.getX() * p2.getY() - p1.getY() * p2.getX()) > 0;
 	}
 
