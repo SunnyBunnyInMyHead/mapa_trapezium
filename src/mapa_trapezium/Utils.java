@@ -215,4 +215,36 @@ public class Utils {
     public static boolean same(Point p1, Point p2){
 		return same(p1.getX(),p2.getX())&&same(p1.getY(),p2.getY());
 	}
+
+	public static boolean isPointInside(Point point, Point[] arr){
+		if (arr.length < 2) {
+			return false;
+		}
+		Point vec1, vec2;
+
+		for (int i = 0; i < arr.length - 1; i++){
+			vec1 = Utils.getVector(arr[i], point);
+			vec2 = Utils.getVector(arr[i], arr[i + 1]);
+			if(!getDirectionVectorSign(vec1,vec2)){
+				return false;
+			}
+		}
+
+		vec1 = Utils.getVector(arr[arr.length - 1], point);
+		vec2 = Utils.getVector(arr[arr.length - 1], arr[0]);
+		if(!getDirectionVectorSign(vec1,vec2)){
+			return false;
+		}
+
+		return true;
+	}
+
+    public static boolean isPointOnBorder(Point point, Point[] arr){
+		for (Point point1:arr) {
+			if(Utils.same(point1,point)){
+				return true;
+			}
+		}
+		return false;
+	}
 }

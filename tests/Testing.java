@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -174,6 +175,38 @@ public class Testing {
         crossPointExpected = new Point(5,6);
         crossPoint = Utils.getCrossPoint(line1,line2);
         assertTrue(Utils.same(crossPoint,crossPointExpected));
+    }
+
+    @Test
+    public void testPointInsideArea(){
+        ArrayList<Point> points = new ArrayList<>();
+        points.add(new Point(1, 3));
+        points.add(new Point(3, 6));
+        points.add(new Point(7, 6));
+        points.add(new Point(9, 3));
+        Point[] pointArr = points.toArray(new Point[0]);
+        Point observer = new Point(3,5.5);
+        assertTrue(Utils.isPointInside(observer,pointArr));
+        observer = new Point(3,7);
+        assertFalse(Utils.isPointInside(observer,pointArr));
+        observer = new Point(3,6);
+        assertFalse(Utils.isPointInside(observer,pointArr));
+    }
+
+    @Test
+    public void testPointOnBorder(){
+        ArrayList<Point> points = new ArrayList<>();
+        points.add(new Point(1, 3));
+        points.add(new Point(3, 6));
+        points.add(new Point(7, 6));
+        points.add(new Point(9, 3));
+        Point[] pointArr = points.toArray(new Point[0]);
+        Point observer = new Point(3,6);
+        assertTrue(Utils.isPointOnBorder(observer,pointArr));
+        observer = new Point(3,7);
+        assertFalse(Utils.isPointOnBorder(observer,pointArr));
+        observer = new Point(3,5);
+        assertFalse(Utils.isPointOnBorder(observer,pointArr));
     }
 
     boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
