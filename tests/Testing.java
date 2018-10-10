@@ -211,7 +211,7 @@ public class Testing {
 
     boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
 
-        Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(pointsArr, observer, numbOfNearestPoints, numbOfFurtherPoints,typeOfTrapGen);
+        Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(pointsArr, observer,typeOfTrapGen);
 
         return  (Utils.same(trapezium.getArea(),trapeziumCalculated.getArea())
                 &&(Utils.same(Utils.getDist(observer, trapezium.getNearLine()), Utils.getDist(observer, trapeziumCalculated.getNearLine())))

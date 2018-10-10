@@ -198,18 +198,16 @@ public class TrapeziumUtils {
      *
      * @param points point array
      * @param observer outer point
-     * @param numbNearestPoints numb of nearest points witch will tried in combinations
-     * @param numbFurtherPoints numb of further points witch will tried in combinations
+     //* @param numbNearestPoints numb of nearest points witch will tried in combinations
+     //* @param numbFurtherPoints numb of further points witch will tried in combinations
      * @param typeOfTrapeziumGeneration 0 - all types
      *                                  1 - one nearest, one further
      *                                  2 - two nearest
      *                                  3 - two further
      * @return trapezium with max area
      */
-    public  static Trapezium  calculateTrapezium(Point[] points, Point observer, int numbNearestPoints,
-                                        int numbFurtherPoints, int typeOfTrapeziumGeneration) {
+    public  static Trapezium  calculateTrapezium(Point[] points, Point observer, int typeOfTrapeziumGeneration) {
         Point[] pointsUpdated = points;
-        //show(pointArr);
         // edited array
         if(pointsUpdated.length<=5) {
             pointsUpdated = Utils.addMiddlePoints(pointsUpdated);
@@ -224,18 +222,18 @@ public class TrapeziumUtils {
         List<Trapezium> list = new ArrayList<>();
         switch (typeOfTrapeziumGeneration) {
             case 1:
-                list.addAll(getTrapeziumsByDifferentPoints(pointsUpdated, observer, numbNearestPoints, numbFurtherPoints));
+                list.addAll(getTrapeziumsByDifferentPoints(pointsUpdated, observer, pointsUpdated.length/2, pointsUpdated.length/2));
                 break;
             case 2:
-                list.addAll(getTrapeziumsByNearestPoints(pointsUpdated, observer, (int) (numbNearestPoints * 1.8)));
+                list.addAll(getTrapeziumsByNearestPoints(pointsUpdated, observer, pointsUpdated.length));
                 break;
             case 3:
-                list.addAll(getTrapeziumsByFurtherPoints(pointsUpdated, observer, (int) (numbFurtherPoints * 1.8)));
+                list.addAll(getTrapeziumsByFurtherPoints(pointsUpdated, observer, pointsUpdated.length));
                 break;
             default:
-                list.addAll(getTrapeziumsByDifferentPoints(pointsUpdated, observer, numbNearestPoints, numbFurtherPoints));
-                list.addAll(getTrapeziumsByNearestPoints(pointsUpdated, observer, (int) (numbNearestPoints * 1.8)));
-                list.addAll(getTrapeziumsByFurtherPoints(pointsUpdated, observer, (int) (numbNearestPoints * 1.8)));
+                list.addAll(getTrapeziumsByDifferentPoints(pointsUpdated, observer, pointsUpdated.length/2, pointsUpdated.length/2));
+                list.addAll(getTrapeziumsByNearestPoints(pointsUpdated, observer,pointsUpdated.length));
+                list.addAll(getTrapeziumsByFurtherPoints(pointsUpdated, observer, pointsUpdated.length));
                 break;
 
         }
