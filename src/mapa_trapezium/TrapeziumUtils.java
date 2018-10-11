@@ -53,7 +53,7 @@ public class TrapeziumUtils {
                 if (secondFurtherPoint == null) {
                     continue;
                 }
-                list.add(new Trapezium(minPos, secondNearestPoint, maxPos, secondFurtherPoint));
+                list.add(new Trapezium(minPos, secondNearestPoint, maxPos, secondFurtherPoint,observer));
             }
         }
         return list;
@@ -81,7 +81,7 @@ public class TrapeziumUtils {
                 if (furtherPoint2 == null) {
                     continue;
                 }
-                list.add(new Trapezium(minPos1, minPos2, furtherPoint2, furtherPoint1));
+                list.add(new Trapezium(minPos1, minPos2, furtherPoint2, furtherPoint1,observer));
             }
         }
         return list;
@@ -110,7 +110,7 @@ public class TrapeziumUtils {
                 if (nearestPoint2 == null) {
                     continue;
                 }
-                list.add(new Trapezium(nearestPoint1, nearestPoint2, maxPos2, maxPos1));
+                list.add(new Trapezium(nearestPoint1, nearestPoint2, maxPos2, maxPos1,observer));
             }
         }
         return list;

@@ -7,15 +7,19 @@ public class Trapezium {
 	private final Point furtherAdd;
 	private double area = 0.0;
     private boolean valid = false;
+    private double minDis;
+    private double maxDist;
 
-	public Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd) {
+
+	public Trapezium(Point nearestMain, Point nearestAdd, Point furtherMain, Point furtherAdd, Point outer) {
 		this.nearestMain = nearestMain;
 		this.nearestAdd = nearestAdd;
 		this.furtherMain = furtherMain;
 		this.furtherAdd = furtherAdd;
 		validate();
 		if (valid) {
-			calibrate();
+			//calibrate();
+            setDistancePoint(outer);
 			area = calcArea(this.nearestMain, this.nearestAdd, this.furtherMain, this.furtherAdd);
 		}
 
@@ -61,7 +65,8 @@ public class Trapezium {
     }
 
     public double getArea() {
-		return area;
+		//return area;
+        return findSektorArea();
 	}
 
 	private double calcArea(double sideA, double sideB, double sideC, double sideD) {
@@ -91,4 +96,17 @@ public class Trapezium {
 		return Utils.createLine(furtherMain, furtherAdd);
 	}
 
+	public double findSektorArea(){
+        Line line1 = Utils.createLine(nearestAdd, furtherMain);
+        Line line2 = Utils.createLine(nearestMain, furtherAdd);
+        double angle = Utils.getAngle(line1,line2);
+	    return Math.PI*(angle/360)*((maxDist*maxDist)-(minDis*minDis));
+    }
+
+    private void setDistancePoint(Point outer){
+        minDis = Utils.getDist(outer, nearestMain)> Utils.getDist(outer,nearestAdd)?
+                Utils.getDist(outer, nearestMain):Utils.getDist(outer,nearestAdd);
+        maxDist = Utils.getMin(Utils.getDist(furtherMain,outer),Utils.getDist(furtherAdd,outer),
+                Utils.getDist(outer, Utils.createLine(furtherAdd,furtherMain)));
+    }
 }

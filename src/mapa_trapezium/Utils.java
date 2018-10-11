@@ -247,4 +247,32 @@ public class Utils {
 		}
 		return false;
 	}
+
+	public static double getMin(double a, double b, double c){
+	    if(a<b){
+	        if(a<c){
+	            return a;
+            }
+            return c;
+        }else {
+	        if(b<c){
+	            return b;
+            }
+            return c;
+        }
+    }
+
+    public static double getMax(double a, double b, double c){
+        if(a>b){
+            if(a>c){
+                return a;
+            }
+            return c;
+        }else {
+            if(b>c){
+                return b;
+            }
+            return c;
+        }
+    }
 }
