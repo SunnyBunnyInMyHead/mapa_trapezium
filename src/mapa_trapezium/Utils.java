@@ -191,20 +191,16 @@ public class Utils {
 	}
 
 	public  static boolean isPointBelongToStretch(Point beg, Point end, Point point){
-	    if((Utils.same(point.getX(),beg.getX())&&Utils.same(point.getY(),beg.getY()))
-        ||(Utils.same(point.getX(),end.getX())&&Utils.same(point.getY(),end.getY()))){
-	        return true;
-        }
-	    if(beg.getX()>end.getX()){
-	        if(beg.getY()>end.getY()){
-	            return beg.getX()>point.getX()&&point.getX()>end.getX()&&beg.getY()>point.getY()&&point.getY()>end.getY();
+	    if(beg.getX()>=end.getX()){
+	        if(beg.getY()>=end.getY()){
+	            return beg.getX()>=point.getX()&&point.getX()>=end.getX()&&beg.getY()>=point.getY()&&point.getY()>=end.getY();
             }
-            return beg.getX()>point.getX()&&point.getX()>end.getX()&&beg.getY()<point.getY()&&point.getY()<end.getY();
+            return beg.getX()>=point.getX()&&point.getX()>=end.getX()&&beg.getY()<=point.getY()&&point.getY()<=end.getY();
         }else {
-            if(beg.getY()>end.getY()){
-                return beg.getX()<point.getX()&&point.getX()<end.getX()&&beg.getY()>point.getY()&&point.getY()>end.getY();
+            if(beg.getY()>=end.getY()){
+                return beg.getX()<=point.getX()&&point.getX()<=end.getX()&&beg.getY()>=point.getY()&&point.getY()>=end.getY();
             }
-            return beg.getX()<point.getX()&&point.getX()<end.getX()&&beg.getY()<point.getY()&&point.getY()<end.getY();
+            return beg.getX()<=point.getX()&&point.getX()<=end.getX()&&beg.getY()<=point.getY()&&point.getY()<=end.getY();
         }
     }
 
@@ -239,7 +235,7 @@ public class Utils {
 		return true;
 	}
 
-    public static boolean isPointOnBorder(Point point, Point[] arr){
+    public static boolean isPointOnTop(Point point, Point[] arr){
 		for (Point point1:arr) {
 			if(Utils.same(point1,point)){
 				return true;
@@ -247,6 +243,40 @@ public class Utils {
 		}
 		return false;
 	}
+
+	public static boolean isPointOnBorder(Point point, Point[] arr){
+	    Point tempPoint = arr[arr.length-1];
+        for (int i = 0; i < arr.length; i++) {
+            if(isPointBelongToStretch(tempPoint,arr[i],point)){
+                return true;
+            }
+            tempPoint = arr[i];
+        }
+        return false;
+    }
+
+    public static boolean isPointOutside(Point point, Point[] arr){
+        if (arr.length < 2) {
+            return false;
+        }
+        Point vec1, vec2;
+        boolean dir=true;
+        vec1 = Utils.getVector(arr[arr.length - 1], point);
+        vec2 = Utils.getVector(arr[arr.length - 1], arr[0]);
+        if(getDirectionVectorSign(vec1,vec2)){
+            dir= false;
+        }
+
+
+        for (int i = 0; i < arr.length - 1; i++){
+            vec1 = Utils.getVector(arr[i], point);
+            vec2 = Utils.getVector(arr[i], arr[i + 1]);
+            if(getDirectionVectorSign(vec1,vec2)!=dir){
+                return false;
+            }
+        }
+        return true;
+    }
 
 	public static double getMin(double a, double b, double c){
 	    if(a<b){

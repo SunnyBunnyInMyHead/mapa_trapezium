@@ -10,10 +10,10 @@ public class TrapeziumUtils {
         }
         Trapezium[] trap  = deleteNotCalibratedTrapezium(trapeziums);
         Trapezium bestTrapezium = trap[0];
-        double bestArea = bestTrapezium.getArea();
+        double bestArea = bestTrapezium.findSektorArea();
         for (int i = 1; i < trap.length; i++) {
-            if (trap[i].getArea() > bestArea) {
-                bestArea = trap[i].getArea();
+            if (trap[i].findSektorArea() > bestArea) {
+                bestArea = trap[i].findSektorArea();
                 bestTrapezium = trap[i];
             }
         }

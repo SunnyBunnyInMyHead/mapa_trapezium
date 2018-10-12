@@ -18,8 +18,5 @@ public class AdditionalMain {
         show(trapezium0 .getPoints());
         System.out.println(trapezium0.findSektorArea());
         System.out.println(trapezium0.getArea());
-
-
-
     }
 }

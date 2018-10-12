@@ -18,7 +18,7 @@ public class Trapezium {
 		this.furtherAdd = furtherAdd;
 		validate();
 		if (valid) {
-			//calibrate();
+			calibrate();
             setDistancePoint(outer);
 			area = calcArea(this.nearestMain, this.nearestAdd, this.furtherMain, this.furtherAdd);
 		}
@@ -65,8 +65,7 @@ public class Trapezium {
     }
 
     public double getArea() {
-		//return area;
-        return findSektorArea();
+		return area;
 	}
 
 	private double calcArea(double sideA, double sideB, double sideC, double sideD) {

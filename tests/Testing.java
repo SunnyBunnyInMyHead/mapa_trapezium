@@ -202,11 +202,11 @@ public class Testing {
         points.add(new Point(9, 3));
         Point[] pointArr = points.toArray(new Point[0]);
         Point observer = new Point(3,6);
-        assertTrue(Utils.isPointOnBorder(observer,pointArr));
+        assertTrue(Utils.isPointOnTop(observer,pointArr));
         observer = new Point(3,7);
-        assertFalse(Utils.isPointOnBorder(observer,pointArr));
+        assertFalse(Utils.isPointOnTop(observer,pointArr));
         observer = new Point(3,5);
-        assertFalse(Utils.isPointOnBorder(observer,pointArr));
+        assertFalse(Utils.isPointOnTop(observer,pointArr));
     }
 
     boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
