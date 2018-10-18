@@ -137,7 +137,7 @@ public class TrapeziumUtils {
                     continue;
                 }
                 distance = Utils.getDist(observer, crossPoint);
-                if (distance < maxDistance && distance > totalMinDistance) {
+                if (distance < maxDistance) {
                     if (distance <= bestCrossPointDist) {// check best
                         if(strikePoint!=null&&Utils.same(crossPoint,strikePoint)){
                             continue;
@@ -148,7 +148,7 @@ public class TrapeziumUtils {
                 }
             }
         }
-        if (Utils.same(bestCrossPoint.getY(),maxPoint.getY())&&Utils.same(bestCrossPoint.getX(),maxPoint.getX())) {
+        if (Utils.same(bestCrossPoint,maxPoint)&&Utils.same(bestCrossPointDist,maxDistance)) {
             return null;// there are no good points
         }
         return bestCrossPoint;
@@ -175,7 +175,7 @@ public class TrapeziumUtils {
                     continue;
                 }
                 distance = Utils.getDist(observer, crossPoint);
-                if (distance > minDistance && distance < totalMaxDistance) {
+                if (distance > minDistance && distance <= totalMaxDistance) {
                     if (distance >= bestCrossPointDist) {// check best
                         if(strikePoint!=null&&Utils.same(crossPoint,strikePoint)){
                             continue;
@@ -187,7 +187,7 @@ public class TrapeziumUtils {
             }
         }
 
-        if (Utils.same(bestCrossPoint.getY(),minPoint.getY())&&Utils.same(bestCrossPoint.getX(),minPoint.getX())) {
+        if (Utils.same(bestCrossPoint,minPoint)) {
             return null;// there are no good points
         }
         return bestCrossPoint;
@@ -215,9 +215,6 @@ public class TrapeziumUtils {
         }
             pointsUpdated = Utils.addMiddlePoints(pointsUpdated);
 
-        // create positions(points with distance)
-        Position[] positions = Utils.getDist(observer, pointsUpdated);
-        Utils.sortPositionByDist(positions);
         // create Trapezium
         List<Trapezium> list = new ArrayList<>();
         switch (typeOfTrapeziumGeneration) {
@@ -225,10 +222,10 @@ public class TrapeziumUtils {
                 list.addAll(getTrapeziumsByDifferentPoints(pointsUpdated, observer, pointsUpdated.length/2, pointsUpdated.length/2));
                 break;
             case 2:
-                list.addAll(getTrapeziumsByNearestPoints(pointsUpdated, observer, pointsUpdated.length));
+                list.addAll(getTrapeziumsByNearestPoints(pointsUpdated, observer, (int)(pointsUpdated.length*0.75)));
                 break;
             case 3:
-                list.addAll(getTrapeziumsByFurtherPoints(pointsUpdated, observer, pointsUpdated.length));
+                list.addAll(getTrapeziumsByFurtherPoints(pointsUpdated, observer, (int)(pointsUpdated.length*0.75)));
                 break;
             default:
                 list.addAll(getTrapeziumsByDifferentPoints(pointsUpdated, observer, pointsUpdated.length/2, pointsUpdated.length/2));

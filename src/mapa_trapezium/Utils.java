@@ -82,8 +82,8 @@ public class Utils {
 	}
 
 	static double getDist(Point point1, Point point2) {
-		return Math.sqrt((point2.getX() - point1.getX()) * (point2.getX() - point1.getX())
-				+ (point2.getY() - point1.getY()) * (point2.getY() - point1.getY()));
+		return Math.abs(Math.sqrt((point2.getX() - point1.getX()) * (point2.getX() - point1.getX())
+				+ (point2.getY() - point1.getY()) * (point2.getY() - point1.getY())));
 	}
 
 	static Position[] getDist(Point point, Point[] points) {
@@ -305,4 +305,24 @@ public class Utils {
             return c;
         }
     }
+
+    public static Point getMax(ArrayList<Position> arr){
+		Position best = arr.get(0);
+		for (Position position: arr) {
+			if(position.getDist()>best.getDist()){
+				best = position;
+			}
+		}
+		return best.getPoint();
+	}
+
+	public static Point getMin(ArrayList<Position> arr){
+		Position best = arr.get(0);
+		for (Position position: arr) {
+			if(position.getDist()<best.getDist()){
+				best = position;
+			}
+		}
+		return best.getPoint();
+	}
 }
