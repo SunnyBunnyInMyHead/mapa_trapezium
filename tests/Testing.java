@@ -8,20 +8,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class Testing {
-   /* @Test
-    public void FullTest() {
-        rhombusTest();
-        trapeziumTest();
-        triangleTest();
-        pentagonTest();
-        hexTest();
-    }
 
     @Test
     public void rhombusTest(){
         System.out.println("rhombusTest");
-        Trapezium checkTrapezium = new Trapezium(new Point(7.0,7.0),new Point(6.0,10.0),new Point(8.0,16.0),new Point(10.0,10.0));// jn diagonal
         Point observer = new Point(4,4);
+        Trapezium checkTrapezium = new Trapezium(new Point(7.0,7.0),new Point(6.0,10.0),new Point(7.0,13.0),new Point(10.0,10.0),observer);// on diagonal
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(6, 10));
         points.add(new Point(8, 16));
@@ -29,19 +21,19 @@ public class Testing {
         points.add(new Point(8, 4));
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
 
         //side
-        checkTrapezium = new Trapezium(new Point(7.312252964426879,6.300395256917),new Point(6.545454545454547,11.63636363636364),new Point(8.25,15.25),new Point(9.304347826086957,7.913043478260871));
         observer =new Point(2,2);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(6.25,9.25),new Point(7.0,6.999999999999999),new Point(10.0,10.0),new Point(8.799999999999999,13.6),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
     }
 
     @Test
     public void trapeziumTest(){
         System.out.println("trapeziumTest");
-        Trapezium checkTrapezium = new Trapezium(new Point(3.0,6.0),new Point(7.0,6.0),new Point(8.0,3.0),new Point(2.0,3.0));//up
         Point observer = new Point(5, 12);
+        Trapezium checkTrapezium = new Trapezium(new Point(3.0,6.0),new Point(7.0,6.0),new Point(8.0,3.0),new Point(2.0,3.0),observer);//up
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(1, 3));
         points.add(new Point(3, 6));
@@ -49,62 +41,62 @@ public class Testing {
         points.add(new Point(9, 3));
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
-        checkTrapezium = new Trapezium(new Point(7.857142857142857,4.714285714285714),new Point(2.142857142857143,4.714285714285714),new Point(9.0,3.0),new Point(1.0,3.0));//center
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
         observer =new Point(5,4);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(6.0,3.0),new Point(4.0,3.0),new Point(7.0,6.0),new Point(3.0,6.0),observer);//center
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
         //up cross lines
-        checkTrapezium = new Trapezium(new Point(7.0,6.0),new Point(3.0,6.0),new Point(1.0,3.0),new Point(9.0,3.0));
         observer =new Point(5,9);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(3.0,6.0),new Point(7.0,6.0),new Point(9.0,3.0),new Point(1.0,3.0),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
         //under big base
-        checkTrapezium = new Trapezium(new Point(6.0,3.0),new Point(4.0,3.0),new Point(3.0,6.0),new Point(7.0,6.0));
         observer =new Point(5,0);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(6.0,3.0),new Point(4.0,3.0),new Point(3.0,6.0),new Point(7.0,6.0),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
         //on diagonal
-        checkTrapezium = new Trapezium(new Point(8.66666666666667,3.5),new Point(6.0,3.0),new Point(2.428571428571429,5.142857142857143),new Point(7.0,6.0));
         observer =new Point(11,0);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(7.0,3.0),new Point(4.2727272727272725,3.0),new Point(1.75,4.125),new Point(3.0,6.0),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
         //up corner
-        checkTrapezium = new Trapezium(new Point(7.25,5.625),new Point(6.5,6.0),new Point(3.0,6.0),new Point(9.0,3.0));
         observer =new Point(7, 6);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(7.25,5.625),new Point(7.0,6.0),new Point(1.0,3.0),new Point(9.0,3.0),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
     }
 
     @Test
     public void triangleTest(){
         System.out.println("triangleTest");
-        Trapezium checkTrapezium = new Trapezium(new Point(5.800000000000001,5.4),new Point(8.2,5.4),new Point(8.5,3.0),new Point(5.5,3.0));//up
         Point observer = new Point(7,15);
+        Trapezium checkTrapezium = new Trapezium(new Point(5.800000000000001,5.4),new Point(8.2,5.4),new Point(8.5,3.0),new Point(5.5,3.0),observer);//up
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(4, 3));
         points.add(new Point(7, 7));
         points.add(new Point(10, 3));
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
-        assertTrue("//up",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue("//up",testGenTrap(pointArr,observer,checkTrapezium,0));
 
         //under big base
-        checkTrapezium = new Trapezium(new Point(7.75,3.0),new Point(6.25,3.0),new Point(5.6875,5.25),new Point(8.3125,5.25));
         observer =new Point(7,0);
-        assertTrue("//under big base",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(7.9,3.0),new Point(6.1,3.0),new Point(5.5,5.0),new Point(8.5,5.0),observer);
+        assertTrue("//under big base",testGenTrap(pointArr,observer,checkTrapezium,0));
 
         //on diagonal
-        checkTrapezium = new Trapezium(new Point(7.999999999999998,4.333333333333333),new Point(7.0,3.0),new Point(5.0,4.333333333333333),new Point(6.333333333333333,6.111111111111111));
         observer =new Point(13,-1);
-        assertTrue("//on diagonal",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(10.0,3.0),new Point(7.2727272727272725,3.0),new Point(5.125,4.5),new Point(7.0,7.0),observer);
+        assertTrue("//on diagonal",testGenTrap(pointArr,observer,checkTrapezium,0));
 
         //somewhere near side diagonal
-        checkTrapezium = new Trapezium(new Point(7.176470588235294,4.647058823529412),new Point(8.764705882352942,4.647058823529412),new Point(7.0,3.0),new Point(4.0,3.0));
         observer =new Point(10.75, 6.5);
-        assertTrue("//somewhere near side diagonal",testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(7.970588235294118,5.705882352941177),new Point(8.764705882352942,4.647058823529412),new Point(7.0,3.0),new Point(5.5,5.0),observer);
+        assertTrue("//somewhere near side diagonal",testGenTrap(pointArr,observer,checkTrapezium,0));
     }
 
     @Test
     public void pentagonTest(){
         System.out.println("pentagonTest");
-        Trapezium checkTrapezium = new Trapezium(new Point(9.6,16.399999999999995),new Point(9.6,11.6),new Point(4.0,10.0),new Point(4.0,18.0));//up
         Point observer = new Point(18,14);
+        Trapezium checkTrapezium = new Trapezium(new Point(9.600000000000001,16.4),new Point(9.6,11.6),new Point(4.0,10.0),new Point(4.0,18.0),observer);//up
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(4, 10));
         points.add(new Point(4, 18));
@@ -113,17 +105,17 @@ public class Testing {
         points.add(new Point(8, 10));
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
 
         //on top
-        checkTrapezium = new Trapezium(new Point(11.5,14.5),new Point(11.5,13.5),new Point(8.0,10.0),new Point(8.0,18.0));
         observer =new Point(12,14);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(11.5,14.5),new Point(12.0,14.0),new Point(4.0,10.0),new Point(8.0,18.0),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
 
         //somewhere
-        checkTrapezium = new Trapezium(new Point(6.0,10.0),new Point(4.0,12.0),new Point(8.0,18.0),new Point(12.0,14.0));
         observer =new Point(0,6);
-        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0,5,5));
+        checkTrapezium = new Trapezium(new Point(4.0,12.0),new Point(6.0,10.0),new Point(12.0,14.0),new Point(8.0,18.0),observer);
+        assertTrue(testGenTrap(pointArr,observer,checkTrapezium,0));
 
     }
 
@@ -132,13 +124,13 @@ public class Testing {
         System.out.println("hexTest");
         //check value
         Trapezium [] trapeziums = new Trapezium[4];
-
-        trapeziums[0] = new Trapezium(new Point(1.9961021884099057,8.17037663191509),new Point(3.2435897435897525,8.034188034188032),new Point(4.0,4.0),new Point(1.4835164835164836,4.274725274725275));//0
-        trapeziums[1] = new Trapezium(new Point(1.9961021884099057,8.17037663191509),new Point(3.2435897435897525,8.034188034188032),new Point(4.0,4.0),new Point(1.4835164835164836,4.274725274725275));//1
-        trapeziums[2] = new Trapezium(new Point(3.5,8.0),new Point(1.919152276295133,7.585557299843013),new Point(1.4835164835164836,4.274725274725275),new Point(4.25,5.0));//2
-        trapeziums[3] = new Trapezium(new Point(3.2435897435897525,8.034188034188032),new Point(2.004273504273513,8.158119658119656),new Point(1.5,4.25),new Point(4.0,4.0));//3
-
         Point observer = new Point(2.5, 12);
+        trapeziums[0] = new Trapezium(new Point(2.0,8.2),new Point(3.2435897435897525,8.034188034188032),new Point(4.0,4.0),new Point(1.4835164835164836,4.274725274725275),observer);//0
+        trapeziums[1] = new Trapezium(new Point(2.0,8.2),new Point(3.2435897435897525,8.034188034188032),new Point(4.0,4.0),new Point(1.4835164835164836,4.274725274725275),observer);//1
+        trapeziums[2] = new Trapezium(new Point(2.0,8.2),new Point(3.5,8.0),new Point(4.25,5.0),new Point(1.4835164835164836,4.274725274725275),observer);//2
+        trapeziums[3] = new Trapezium(new Point(3.2435897435897525,8.034188034188032),new Point(2.009513742071885,8.19873150105708),new Point(1.5,4.25),new Point(4.0,4.0),observer);//3
+
+
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(1, 5));
         points.add(new Point(1, 7));
@@ -153,7 +145,7 @@ public class Testing {
         Point[] pointArr = points.toArray(new Point[0]);
         assert Utils.isPolygonBulging(pointArr);
         for (int i = 0;i<4;i++){// 4, because there are only 4 type of generation
-            if(!testGenTrap(pointArr,observer,trapeziums[i],i,5,5)){
+            if(!testGenTrap(pointArr,observer,trapeziums[i],i)){
                 fail(String.valueOf("fail on"+i));
             }
         }
@@ -209,7 +201,7 @@ public class Testing {
         assertFalse(Utils.isPointOnTop(observer,pointArr));
     }
 
-    boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen, int numbOfNearestPoints, int numbOfFurtherPoints){
+    boolean testGenTrap(Point[] pointsArr, Point observer, Trapezium trapezium ,int typeOfTrapGen){
 
         Trapezium trapeziumCalculated = TrapeziumUtils.calculateTrapezium(pointsArr, observer,typeOfTrapGen);
 
@@ -218,4 +210,4 @@ public class Testing {
                 &&(Utils.same(Utils.getDist(observer, trapezium.getFurtherLine()), Utils.getDist(observer, trapeziumCalculated.getFurtherLine())))
                 );
     }
-*/}
+}

@@ -18,7 +18,7 @@ public class Trapezium {
 		this.furtherAdd = furtherAdd;
 		validate();
 		if (valid) {
-			calibrate();
+			//calibrate();
             setDistancePoint(outer);
 			area = calcArea(this.nearestMain, this.nearestAdd, this.furtherMain, this.furtherAdd);
 		}
